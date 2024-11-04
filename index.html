@@ -4,59 +4,116 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        .container {
+          padding-left: 100px;
+          max-width: 100%;
+        }
+        h1 {
+          margin-bottom: 20px;
+        }
+        #musicMatchForm {
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+          max-width: 300px;
+        }
+        #musicMatchForm label,
+        #musicMatchForm input,
+        #musicMatchForm select,
+        #musicMatchForm button {
+          margin-bottom: 10px;
+        }
+    </style>
 </head>
 
-<style>
-    /* Container to wrap heading and form */
-    .container {
-      padding-left: 100px; /* Adjust this value to position the container from the left */
-    }
-  
-    /* Style for the heading */
-    h1 {
-      margin-bottom: 20px; /* Adds space between heading and form */
-    }
-  
-    /* Style for the form */
-    #musicMatchForm {
-      display: flex;
-      flex-direction: column;/* Align form items to the left */
-      width: 100%;
-      max-width: 300px; /* Optional: limits form width */
-    }
-  
-    #musicMatchForm label,
-    #musicMatchForm input,
-    #musicMatchForm select,
-    #musicMatchForm button {
-      margin-bottom: 10px; /* Space between inputs */
-    }
-  </style>
-  
 <body>
-    <h1>MUSIC Match</h1>
-    <form id="musicMatchForm">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required />
-      
-        <label for="age">Age:</label>
-        <input type="number" id="age" name="age" required />
-      
-        <label for="gender">Gender:</label>
-        <select id="gender" name="gender" required>
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-        </select>
-      
-        <label>Favorite Musicians:</label>
-        <input type="text" name="Artist1" placeholder="Artist 1" required />
-        <input type="text" name="Artist2" placeholder="Artist 2" required />
-        <input type="text" name="Artist3" placeholder="Artist 3" required />
-        <input type="text" name="Artist4" placeholder="Artist 4" required />
-        <input type="text" name="Artist5" placeholder="Artist 5" required />
-        <p></p>
-      
-        <button type="submit">Find My Match</button>
-      </form>
+    <div class="container">
+        <h1>MUSIC MATCH</h1>
+        <form id="musicMatchForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required />
+          
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" required />
+          
+            <label for="gender">Gender:</label>
+            <select id="gender" name="gender" required>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select>
+
+            <label>Phone Number:</label>
+            <input type="text" id="phone" name="Phone#" required />
+
+            <label>Instagram:</label>
+            <input type="text" id="instagram" name="Instagram" />
+
+            <label>Favorite Musicians:</label>
+            <input type="text" id="artist1" name="Artist1" placeholder="Artist 1" required />
+            <input type="text" id="artist2" name="Artist2" placeholder="Artist 2" required />
+            <input type="text" id="artist3" name="Artist3" placeholder="Artist 3" required />
+            <input type="text" id="artist4" name="Artist4" placeholder="Artist 4" required />
+            <input type="text" id="artist5" name="Artist5" placeholder="Artist 5" required />
+          
+            <button type="submit">Find My Match</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('musicMatchForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+          
+            const name = document.getElementById('name').value;
+            const age = document.getElementById('age').value;
+            const gender = document.getElementById('gender').value;
+            const phone = document.getElementById('phone').value;
+            const instagram = document.getElementById('instagram').value;
+          
+            const musicians = [
+                document.getElementById('artist1').value,
+                document.getElementById('artist2').value,
+                document.getElementById('artist3').value,
+                document.getElementById('artist4').value,
+                document.getElementById('artist5').value
+            ];
+          
+            const formData = {
+                name: name,
+                age: age,
+                gender: gender,
+                phone: phone,
+                instagram: instagram,
+                Artist1: musicians[0],
+                Artist2: musicians[1],
+                Artist3: musicians[2],
+                Artist4: musicians[3],
+                Artist5: musicians[4]
+            };
+
+            // Prepare the URL with query parameters for a GET request
+            const url = new URL("https://script.google.com/macros/s/AKfycbxdinmje77zhUv54bEnwB3CiZ6rYenweO4wgmaKKh-2U-Y7HJm9lSpAWgoxLsnPwsvuxg/exec"); // Replace with your Web App URL
+
+            // Add formData as URL parameters
+            Object.keys(formData).forEach(key => url.searchParams.append(key, formData[key]));
+
+            // Send the GET request
+            fetch(url, {
+                method: "GET"
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.result === "success") {
+                    alert("Your data has been recorded!");
+                } else {
+                    alert("There was an issue recording your data. Please try again.");
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert("An error occurred while submitting your data. Please try again.");
+            });
+        });
+    </script>
 </body>
 </html>
