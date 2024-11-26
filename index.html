@@ -7,153 +7,99 @@
     <style>
         /* General Styles */
         body {
-            background-color: #fff;
-            color: #000;
+            background-color: #000;
+            color: #fff;
             font-family: Arial, sans-serif;
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            margin: 0;
-            padding: 40px;
-        }
-
-        /* Container */
-        .container {
-            max-width: 400px;
             margin: 0;
             padding: 0;
-            position: relative;
-            z-index: 1;
+            height: 100vh;
+            background-image: url('jonny.jpg'); /* Replace with your background image */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
         }
 
-        /* Heading with Album-style Look */
+        .container {
+            padding: 20px;
+            margin: 20px;
+            display: flex;
+            flex-direction: column;
+            width: 400px;
+        }
+
         h1 {
             font-size: 2.5em;
             font-weight: bold;
             margin-bottom: 10px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: #000;
-            background-color: #fff;
-            padding: 5px;
-            display: inline-block;
+            text-align: left;
+            color: #fff; /* White font for title */
         }
 
         h2 {
             font-size: 1.2em;
-            margin-bottom: 30px;
-            color: #000;
+            margin-bottom: 20px;
             font-weight: normal;
-            letter-spacing: 1px;
+            text-align: left;
+            color: #fff; /* White font for subtitle */
         }
 
-        /* Form */
-        #musicMatchForm {
+        form {
             display: flex;
             flex-direction: column;
-            max-width: 300px;
         }
 
-        #musicMatchForm label {
+        label {
             font-weight: bold;
             margin-bottom: 5px;
+            color: #fff; /* White font for labels */
         }
 
-        #musicMatchForm input, 
-        #musicMatchForm select, 
-        #musicMatchForm button {
+        input,
+        select,
+        button {
             padding: 10px;
             font-size: 1em;
-            border: 1px solid #000;
-            border-radius: 0;
+            border: 1px solid #fff; /* White border for inputs */
+            background-color: transparent; /* Transparent background */
+            color: #fff; /* White font for inputs */
             margin-bottom: 15px;
-            color: #000;
-            background-color: #fff;
             outline: none;
-            font-family: Arial, sans-serif;
+            width: 100%;
         }
 
-        #musicMatchForm input, 
-        #musicMatchForm select {
-            transition: background-color 0.3s ease;
+        input::placeholder {
+            color: #ccc; /* Light gray for placeholder text */
         }
 
-        #musicMatchForm input:focus, 
-        #musicMatchForm select:focus {
-            background-color: #f0f0f0;
-        }
-
-        #musicMatchForm button {
-            background-color: #000;
-            color: #fff;
+        button {
+            background-color: #fff; /* White button */
+            color: #000; /* Black text on button */
             cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s ease;
+            transition: background-color 0.3s ease, color 0.3s ease;
             font-weight: bold;
             text-transform: uppercase;
+            border: none;
         }
 
-        #musicMatchForm button:hover {
-            background-color: #333;
+        button:hover {
+            background-color: #333; /* Darker button on hover */
+            color: #fff; /* White text on hover */
         }
-
-        /* Background Slideshow */
-        .background-slideshow {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            overflow: hidden;
-        }
-
-        .slide {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-            opacity: 0;
-            animation: slideshow 45s infinite;
-        }
-
-        /* Define each slide with a background image and different animation delays */
-        #slide1 { background-image: url('avicii.jpg'); animation-delay: 0s; }
-        #slide2 { background-image: url('kanye.jpg'); animation-delay: 10s; }
-        #slide3 { background-image: url('metallica.jpg'); animation-delay: 20s; }
-        #slide4 { background-image: url('chili_peppers.jpeg'); animation-delay: 30s; }
-        #slide5 { background-image: url('drummer.jpeg'); animation-delay: 40s; }
-
-        /* Slideshow animation */
-        @keyframes slideshow {
-            0% { opacity: 0; }
-            5% { opacity: 1; }
-            33% { opacity: 1; }
-            38% { opacity: 0; }
-            100% { opacity: 0; }
-        }
-
     </style>
 </head>
-
 <body>
-    <div class="background-slideshow">
-        <div class="slide" id="slide1"></div>
-        <div class="slide" id="slide2"></div>
-        <div class="slide" id="slide3"></div>
-        <div class="slide" id="slide4"></div>
-        <div class="slide" id="slide5"></div>
-    </div>
-
     <div class="container">
         <h1>Music Match</h1>
         <h2>Find Your People</h2>
         <form id="musicMatchForm">
             <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required />
+            <input type="text" id="name" name="name" placeholder="Enter your name" required />
 
             <label for="age">Age:</label>
-            <input type="number" id="age" name="age" required />
+            <input type="number" id="age" name="age" placeholder="Enter your age" required />
 
             <label for="gender">Gender:</label>
             <select id="gender" name="gender" required>
@@ -161,18 +107,18 @@
                 <option value="female">Female</option>
             </select>
 
-            <label>Phone Number:</label>
-            <input type="text" id="phone" name="Phone#" required />
+            <label for="phone">Phone Number:</label>
+            <input type="text" id="phone" name="phone" placeholder="Enter your phone number" required />
 
-            <label>Instagram:</label>
-            <input type="text" id="instagram" name="Instagram" />
+            <label for="instagram">Instagram:</label>
+            <input type="text" id="instagram" name="instagram" placeholder="Enter your Instagram" />
 
-            <label>Favorite Musicians:</label>
-            <input type="text" id="artist1" name="Artist1" placeholder="Artist 1" required />
-            <input type="text" id="artist2" name="Artist2" placeholder="Artist 2" required />
-            <input type="text" id="artist3" name="Artist3" placeholder="Artist 3" required />
-            <input type="text" id="artist4" name="Artist4" placeholder="Artist 4" required />
-            <input type="text" id="artist5" name="Artist5" placeholder="Artist 5" required />
+            <label for="artist1">Favorite Artists:</label>
+            <input type="text" id="artist1" name="artist1" placeholder="Artist 1" required />
+            <input type="text" id="artist2" name="artist2" placeholder="Artist 2" />
+            <input type="text" id="artist3" name="artist3" placeholder="Artist 3" />
+            <input type="text" id="artist4" name="artist4" placeholder="Artist 4" />
+            <input type="text" id="artist5" name="artist5" placeholder="Artist 5" />
 
             <button type="submit">Find My Match</button>
         </form>
